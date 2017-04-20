@@ -1,2 +1,2 @@
 # El-Physicator
-Tentative désespéré de création d'un moteur physique en python
+Tests en tout genre pour le moteur
