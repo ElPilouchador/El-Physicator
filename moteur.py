@@ -74,7 +74,7 @@ def bougerballe():
     return()
 def collision() :
     #collision pente
-		x1 = (sin(anglepente)*vx1)+x1
+    x1 = (sin(anglepente)*vx1)+x1
     y1 = (cos(anglepente)*vy1)+y1
     can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
 #-prog principal-
