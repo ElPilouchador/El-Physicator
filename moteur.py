@@ -77,6 +77,22 @@ def collision() :
     x1 = (sin(anglepente)*vx1)+x1
     y1 = (cos(anglepente)*vy1)+y1
     can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
+def show_values():
+    print (gravite.get(), w2.get())
+def curseur():
+	master = Tk.Tk()
+	gravite_button = Tk.Scale(master, from_=0, to=4,resolution = 0.01,length = 300, tickinterval=1,label = 'Gravitééééé')
+	gravite_button.set(1)
+	gravite_button.pack()
+	w2 = Tk.Scale(master, from_=0, to=200, length = 600, tickinterval=10, orient=Tk.HORIZONTAL)
+	w2.set(23)
+	w2.pack()
+	Tk.Button(master, text='Show', command=show_values).pack()
+	Tk.Button(master, text='Sortir', command=sortir_valeur).pack()
+	return()
+
+
+
 #-prog principal-
 fen1=Tk.Tk()
 fen1.title("El physicator")
