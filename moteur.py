@@ -39,14 +39,16 @@ def pente():
     #ligne
     x1,y1=w,h
     x2,y2=0,tan(angle)*w
-    ligne=can1.create_line(x1,y1,x2,y2,width=2,fill="red",capstyle="round") #oooooh
+    ligne=can1.create_line(x1,y1,x2,y2,width=2,fill="red",capstyle="round")
     return()
 def G():
-	
+	global x1,y1,vx1,vy1,r1,w,h,gravite
+    y1=y1-gravite
+    can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
+
+      
 	return()
   
-def T():
-  	return()
 def createBalle():
   	can1.create_oval(x1-r1,y1-r1,x1+r1,y1+r1,width=1,fill='black')
   	return()
@@ -65,34 +67,31 @@ def bougerballe():
         vy1=10
     #faire avancer balle
   	color= pixPil[x,y]
-  	if color==(255,0,0):
-    	collision()
+    if color==(255,0,0):
+        collision()
     else :
-      x1,y1=x1+vx1,y1+vy1
-    	can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
+		x1,y1=x1+vx1,y1+vy1
+    
+    can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
+    G()  
     fen1.after(17,bougerVerte)
     return()
 def collision() :
     #collision pente
-    x1 = (sin(anglepente)*vx1)+x1
-    y1 = (cos(anglepente)*vy1)+y1
-    can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
-def show_values():
-    print (gravite.get(), w2.get())
-def curseur():
-	master = Tk.Tk()
-	gravite_button = Tk.Scale(master, from_=0, to=4,resolution = 0.01,length = 300, tickinterval=1,label = 'Gravitééééé')
-	gravite_button.set(1)
-	gravite_button.pack()
-	w2 = Tk.Scale(master, from_=0, to=200, length = 600, tickinterval=10, orient=Tk.HORIZONTAL)
-	w2.set(23)
-	w2.pack()
-	Tk.Button(master, text='Show', command=show_values).pack()
-	Tk.Button(master, text='Sortir', command=sortir_valeur).pack()
-	return()
-
-
-
+	global x1, y1, Y, X, vx1, vy1, r1
+    coulPix=[]
+    for alpha in range(0, 360):
+    	X=r1*(sin(alpha))+x1
+    	Y=r1*(cos(alpha))+y1
+		couleur=image.getpixel((X, Y))
+        if couleur == "red":
+    		x1 = (sin(angle)*vx1)+x1
+    		y1 = (cos(angle)*vy1)+y1
+    		can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
+            return()
+        else :
+           continu
+    return()
 #-prog principal-
 fen1=Tk.Tk()
 fen1.title("El physicator")
@@ -115,7 +114,6 @@ menubar.add_cascade(label="Environnement", menu=menuEvrt)
 #menu paramètres physiques
 menuPhysique=Tk.Menu(menubar,tearoff=0)
 menuPhysique.add-command(label="Gravité", command=G)
-menuPhysique.add_command(label="Temps", command=T)
 menubar.add_cascade(label="Paramètres physiques", menu=menuPhysique)
 #menu matière
 menuObjet=Tk.Menu(menubar,tearoff=0)
@@ -131,6 +129,4 @@ fen1.mainloop()
 
 #faire en fonction de la couleurs pixels en verifiant la couleur des pixels autour de la balle (avec le rayon de la balle) OKaaaa 
 # /!\ PLUS : mettre hitbox !
-#processing
-
-
+#faire une fonction pour la vitesse, a chaque colision elle descent, on doit donc créer un boucle for pour determiner quand la boule doit arreter de monter et ensuite actioner la fonction G
