@@ -90,7 +90,7 @@ def collision() :
     		can1.coords(balleVerte,x1-r1,y1-r1,x1+r1,y1+r1)
             return()
         else :
-           continu
+           continue
     return()
 def show_values():
     print (gravite.get(), w2.get())
